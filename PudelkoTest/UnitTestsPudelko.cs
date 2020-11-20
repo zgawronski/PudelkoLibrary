@@ -45,6 +45,7 @@ namespace PudelkoUnitTests
             Assert.AreEqual(defaultSize, p.A, delta: accuracy);
             Assert.AreEqual(defaultSize, p.B, delta: accuracy);
             Assert.AreEqual(defaultSize, p.C, delta: accuracy);
+            Assert.AreEqual(0.1, p.A);
         }
 
         [DataTestMethod, TestCategory("Constructors")]

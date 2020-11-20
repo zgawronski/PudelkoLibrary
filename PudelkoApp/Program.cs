@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using PudelkoLibrary;
-using P = PudelkoLibrary.Pudelko;
+﻿using PudelkoLibrary;
+using System;
+
+
 
 namespace PudelkoApp
 {
@@ -10,8 +10,15 @@ namespace PudelkoApp
         static void Main(string[] args)
         {
             
-            P p = new P(10.1, 20.2, 15.3);
-            Console.WriteLine("Wymiary pudełka: " + p.A  + " x " + p.B + " x " + p.C);
+            Pudelko p = new Pudelko(7.1, 8.2, 4.3, UnitOfMeasure.meter);
+
+            Console.WriteLine(p.ToString());
+            Console.WriteLine(p.ToString("m"));
+            Console.WriteLine(p.ToString("cm"));
+            Console.WriteLine(p.ToString("mm"));
+
+            Console.WriteLine($"Objetosc: {p.Objetosc}");
+            Console.WriteLine($"Pole: {p.Pole}");
 
             Console.ReadKey();
         }
