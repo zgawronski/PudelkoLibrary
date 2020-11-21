@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
+using P = PudelkoLibrary.Pudelko;
 
 namespace PudelkoLibrary
 {
@@ -12,7 +11,7 @@ namespace PudelkoLibrary
         }
 
    
-    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable
+    public sealed class Pudelko : IFormattable, IEquatable<P>, IEnumerable
     {
         private double a, b, c;
        
@@ -138,10 +137,10 @@ namespace PudelkoLibrary
 
         public override bool Equals(object? obj)
         {
-            return Equals((Pudelko)obj);
+            return Equals((P)obj);
         }
 
-        public bool Equals(Pudelko other)
+        public bool Equals(P other)
         {
             if (other is null)
             {
@@ -161,22 +160,22 @@ namespace PudelkoLibrary
             return false;
         }
 
-        public static bool operator ==(Pudelko p1, Pudelko p2) => p1.Equals(p2);
-        public static bool operator !=(Pudelko p1, Pudelko p2) => !(p1 == p2);
-        public static explicit operator double[](Pudelko p) => new double[] { p.A, p.B, p.C };
-        public static implicit operator Pudelko(ValueTuple<int, int, int> v) => new Pudelko(v.Item1, v.Item2, v.Item3, UnitOfMeasure.milimeter);
+        public static bool operator ==(P p1, P p2) => p1.Equals(p2);
+        public static bool operator !=(P p1, P p2) => !(p1 == p2);
+        public static explicit operator double[](P p) => new double[] { p.A, p.B, p.C };
+        public static implicit operator P(ValueTuple<int, int, int> v) => new P(v.Item1, v.Item2, v.Item3, UnitOfMeasure.milimeter);
 
-        public static Pudelko operator +(Pudelko pudelko1, Pudelko pudelko2)
+        public static P operator +(P p1, P p2)
         {
-            double[] doublePudelko1 = (double[])pudelko1, doublePudelko2 = (double[])pudelko2;
+            double[] doubleP1 = (double[])p1, doubleP2 = (double[])p2;
 
-            Array.Sort(doublePudelko1);
-            Array.Sort(doublePudelko2);
+            Array.Sort(doubleP1);
+            Array.Sort(doubleP2);
 
-            return new Pudelko(
-                doublePudelko1[0] + doublePudelko2[0],
-                doublePudelko1[1] + doublePudelko2[1],
-                doublePudelko1[2] + doublePudelko2[2]
+            return new P(
+                doubleP1[0] + doubleP2[0],
+                doubleP1[1] + doubleP2[1],
+                doubleP1[2] + doubleP2[2]
             );
         }
 

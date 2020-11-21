@@ -1,7 +1,8 @@
 ﻿using PudelkoLibrary;
 using System;
+using System.Collections.Generic;
 using P = PudelkoLibrary.Pudelko;
-
+using System.Runtime;
 
 
 namespace PudelkoApp
@@ -10,21 +11,33 @@ namespace PudelkoApp
     {
         static void Main(string[] args)
         {
-            
-            P p1 = new P(7.1, 8.2, 4.3, UnitOfMeasure.meter);
+            List<P> pudelka = new List<P>();
+            pudelka.Add(new P(1.5, 2.555, 0.7, UnitOfMeasure.meter));
+            pudelka.Add(new P(666.99, 123.45, 678.910, UnitOfMeasure.centimeter));
+            pudelka.Add(new P(369, 669, null, UnitOfMeasure.milimeter));
+            pudelka.Add(new P(null, null, 270, UnitOfMeasure.milimeter));
+            pudelka.Add(new P(0.33, null, 0.123456));
+            pudelka.Add(new Pudelko(123, 456, 789, UnitOfMeasure.milimeter).Kompresuj());
 
-            Console.WriteLine(p1.ToString());
-            Console.WriteLine(p1.ToString("m"));
-            Console.WriteLine(p1.ToString("cm"));
-            Console.WriteLine(p1.ToString("mm"));
+            pudelka.Sort();
 
-            Console.WriteLine($"Objetosc: {p1.Objetosc}");
-            Console.WriteLine($"Pole: {p1.Pole}");
-
-
+            pudelka.ForEach((pudelko) => { Console.WriteLine(pudelko.ToString()); });
 
 
             Console.ReadKey();
         }
     }
+    public static class PudelkoExtra
+    {
+        public static P Kompresuj(this P pA)
+        {
+            double E = Convert.ToDouble(pA.Objetosc);
+            double D = Math.Pow(E, (1 / 3));
+            return new P(D, D, D);
+        }
+        //double D = Math.Cbrt(Convert.ToDouble(pA.Objetosc));
+     
+    }
+    
+
 }
