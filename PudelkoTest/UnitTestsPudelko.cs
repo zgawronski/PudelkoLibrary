@@ -451,14 +451,95 @@ namespace PudelkoUnitTests
         #region Pole, Objętość ===================================
         // ToDo
 
+        [DataTestMethod, TestCategory("Sprawdza Pole")]
+        [DataRow(3.75, 5.28, 2.0, 75.72)]
+        [DataRow(3.0, 5.0, 8.0, 158)]
+        [DataRow(1.0, 2.00002, 9.8, 62.8)]
+        public void Pole_test(double a, double b, double c, double expected)
+        {
+            Pudelko pX = new Pudelko(a, b, c);
+
+            Assert.AreEqual(expected + " m2", pX.Pole);
+        }
+
+        [DataTestMethod, TestCategory("Sprawdza Objętość")]
+        [DataRow(3.75, 5.28, 2.0, 39.6)]
+        [DataRow(3.0, 5.0, 8.0, 120)]
+        [DataRow(1.0, 2.00002, 9.8, 19.6)]
+        public void Objetosc_test(double a, double b, double c, double expected)
+        {
+            Pudelko pX = new Pudelko(a, b, c);
+
+            Assert.AreEqual(expected + " m3", pX.Objetosc);
+        }
+
         #endregion
 
         #region Equals ===========================================
         // ToDo
+        [DataTestMethod, TestCategory("Sprawdza Equals")]
+        [DataRow(3.75, 5.28, 2.0, 3.75, 5.280001, 2.0, true)]
+        [DataRow(3.0, 5.0, 8.0, 3.0, 5.0, 8.0, true)]
+        [DataRow(1.0, 2.00002, 9.8, 9.8, 1.0, 2.0, true)]
+        [DataRow(2.3, 3.3, 1.25, 3.3, 1.25, 3.2, false)]
+        [DataRow(7.5, 7.001, 7.0, 7.0001, 7.0, 7.5, false)]
+        public void Test_equals(double a1, double b1, double c1, double a2, double b2, double c2, bool expected)
+        {
+            Pudelko pA = new Pudelko(a1, b1, c1);
+            Pudelko pB = new Pudelko(a2, b2, c2);
+
+            Assert.AreEqual(expected, pA.Equals(pB));
+        }
         #endregion
 
         #region Operators overloading ===========================
         // ToDo
+        [DataTestMethod, TestCategory("Sprawdza przeciążenie operata ==")]
+        [DataRow(3.75, 5.28, 2.0, 3.75, 5.280001, 2.0, true)]
+        [DataRow(3.0, 5.0, 8.0, 3.0, 5.0, 8.0, true)]
+        [DataRow(1.0, 2.00002, 9.8, 9.8, 1.0, 2.0, true)]
+        [DataRow(2.3, 3.3, 1.25, 3.3, 1.25, 3.2, false)]
+        [DataRow(7.5, 7.001, 7.0, 7.0001, 7.0, 7.5, false)]
+        public void Test_equal_operator(double a1, double b1, double c1, double a2, double b2, double c2, bool expected)
+        {
+            Pudelko pA = new Pudelko(a1, b1, c1);
+            Pudelko pB = new Pudelko(a2, b2, c2);
+
+            Assert.AreEqual(expected, pA == pB);
+        }
+
+        [DataTestMethod, TestCategory("Sprawdza przeciążenie operatora !=")]
+        [DataRow(3.75, 5.28, 2.0, 3.75, 5.280001, 2.0, false)]
+        [DataRow(3.0, 5.0, 8.0, 3.0, 5.0, 8.0, false)]
+        [DataRow(1.0, 2.00002, 9.8, 9.8, 1.0, 2.0, false)]
+        [DataRow(2.3, 3.3, 1.25, 3.3, 1.25, 3.2, true)]
+        [DataRow(7.5, 7.001, 7.0, 7.0001, 7.0, 7.5, true)]
+        public void Test_not_equal_operator(double a1, double b1, double c1, double a2, double b2, double c2, bool expected)
+        {
+            Pudelko pA = new Pudelko(a1, b1, c1);
+            Pudelko pB = new Pudelko(a2, b2, c2);
+
+            Assert.AreEqual(expected, pA != pB);
+        }
+
+        [DataTestMethod]
+        [DataRow(1.0, 1.0, 1.0, 1.0, 1.000001, 1.0, 2.0, 2.0, 2.0)]
+        [DataRow(2.5, 3.1, 1.25, 3.1, 2.5, 1.25, 2.5, 5.0, 6.2)]
+        [DataRow(3.25, 2.009, 1.2, 4.001, 4.0, 4.5, 5.2, 6.01, 7.75)]
+        public void Plus_operator_test(double a1, double b1, double c1,
+            double a2, double b2, double c2,
+            double expectedA, double expectedB, double expectedC)
+        {
+            Pudelko pA = new Pudelko(a1, b1, c1);
+            Pudelko pB = new Pudelko(a2, b2, c2);
+
+            Pudelko testPudelko = pA + pB;
+
+            Assert.AreEqual(expectedA, testPudelko.A);
+            Assert.AreEqual(expectedB, testPudelko.B);
+            Assert.AreEqual(expectedC, testPudelko.C);
+        }
+
         #endregion
 
         #region Conversions =====================================

@@ -20,7 +20,7 @@ namespace PudelkoLibrary
         {
             get
             {              
-                return a;
+                return GetRoundedNumber(a);
 
             }
         }
@@ -28,7 +28,7 @@ namespace PudelkoLibrary
         {
             get
             {
-                return b;
+                return GetRoundedNumber(b);
             }
         }
 
@@ -36,7 +36,7 @@ namespace PudelkoLibrary
         {
             get
             {
-                 return c;
+                 return GetRoundedNumber(c);
             }
         }
 
@@ -166,6 +166,20 @@ namespace PudelkoLibrary
         public static explicit operator double[](Pudelko p) => new double[] { p.A, p.B, p.C };
         public static implicit operator Pudelko(ValueTuple<int, int, int> v) => new Pudelko(v.Item1, v.Item2, v.Item3, UnitOfMeasure.milimeter);
 
+        public static Pudelko operator +(Pudelko pudelko1, Pudelko pudelko2)
+        {
+            double[] doublePudelko1 = (double[])pudelko1, doublePudelko2 = (double[])pudelko2;
+
+            Array.Sort(doublePudelko1);
+            Array.Sort(doublePudelko2);
+
+            return new Pudelko(
+                doublePudelko1[0] + doublePudelko2[0],
+                doublePudelko1[1] + doublePudelko2[1],
+                doublePudelko1[2] + doublePudelko2[2]
+            );
+        }
+
         public override string ToString()
         {
             return $"{A.ToString("F3")} m \u00D7 {B.ToString("F3")} m \u00D7 {C.ToString("F3")} m";
@@ -190,12 +204,13 @@ namespace PudelkoLibrary
             }
         }
 
-        /*private static double GetRoundedNumber(double number)
+        private static double GetRoundedNumber(double number)
         {
             number *= 1000;
             number = (int)number;
             number /= 1000;
-            return number; */
+            return number;
+        }
         public static UnitOfMeasure ParseUnitMeasure(string unit)
         {
 
