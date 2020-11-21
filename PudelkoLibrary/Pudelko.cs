@@ -20,7 +20,7 @@ namespace PudelkoLibrary
         {
             get
             {              
-                return GetRoundedNumber(a);
+                return a;
 
             }
         }
@@ -28,7 +28,7 @@ namespace PudelkoLibrary
         {
             get
             {
-                return GetRoundedNumber(b);
+                return b;
             }
         }
 
@@ -36,7 +36,7 @@ namespace PudelkoLibrary
         {
             get
             {
-                 return GetRoundedNumber(c);
+                 return c;
             }
         }
 
@@ -115,8 +115,15 @@ namespace PudelkoLibrary
             var tempB = Math.Truncate((double)b * 1000);
             var tempC = Math.Truncate((double)c * 1000);
 
-            if (tempA > 10000 || tempA <= 0 || tempB > 10000 || tempB <= 0 || tempC > 10000 || tempC <= 0)
-                throw new ArgumentOutOfRangeException("podaj prawidłowe wymiary");
+            //try
+            //{
+                if (tempA > 10000 || tempA <= 0 || tempB > 10000 || tempB <= 0 || tempC > 10000 || tempC <= 0)
+                    throw new ArgumentOutOfRangeException("Podano błędne wymiary!");
+            //}
+            /* catch(Exception)
+            {
+                Console.WriteLine();
+            }*/
 
             this.a = (double)a;
             this.b = (double)b;
@@ -183,13 +190,12 @@ namespace PudelkoLibrary
             }
         }
 
-        private static double GetRoundedNumber(double number)
+        /*private static double GetRoundedNumber(double number)
         {
             number *= 1000;
             number = (int)number;
             number /= 1000;
-            return number;
-        }
+            return number; */
         public static UnitOfMeasure ParseUnitMeasure(string unit)
         {
 

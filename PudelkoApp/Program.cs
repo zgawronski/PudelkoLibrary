@@ -1,5 +1,6 @@
 ﻿using PudelkoLibrary;
 using System;
+using P = PudelkoLibrary.Pudelko;
 
 
 
@@ -10,7 +11,7 @@ namespace PudelkoApp
         static void Main(string[] args)
         {
             
-            Pudelko p = new Pudelko(7.1, 8.2, 4.3, UnitOfMeasure.meter);
+            P p = new P(7000.1, 8.2, 4.3, UnitOfMeasure.meter);
 
             Console.WriteLine(p.ToString());
             Console.WriteLine(p.ToString("m"));
